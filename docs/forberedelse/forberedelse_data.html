@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>forberedelse_data</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="forberedelse-af-datagrundlag">Forberedelse af datagrundlag</h1>
+<p>Særligt relevant for informationskilder der ligger udenfor den
+primære kilde. Den primære informationskilde er i dette tilfælde <a
+href="http://loop.sundhedogomsorg.dk">loop.sundhedogomsorg.dk</a>.
+Nærmere bestemt indholdet lavet i Drupal CMS systemet der bruges til at
+vedligeholde “Loop” som videnskilde. Det information der ligger udenfor
+Loop kalder vi her “ekstern data”. Overvejelserne herunder gælder også
+for indhold hosted i Loop (videoer, filer), som ikke er “formateret” ved
+brug af Drupal CMS systemet.</p>
+<p>Relevante erfaringer for dette er også samlet i * <a
+href="pandoc_panflute_handle_docx.md">Behandling af docx med pandoc</a>
+* <a href="urls_from_loop_messages.md">Udtræk URLer fra Loop beskeder og
+download ekstern data</a></p>
+<h2 id="baggrund">Baggrund</h2>
+<p>Data trækkes ved semantisk søgning ud fra videnskildens database i
+bidder, der er repræsenteret af maksimalt 500 token (omkring 300 ord).
+Alternativt kan det trækkes ud ved søgning efter nøgleord eller graf
+struktureret søgning (eller en vilkårlig anden søgemetode).</p>
+<p>Kun den viden fra videnskilden der identificeres via søgningen udgør
+ideelt set baggrundsviden for sprogmodellen, når et brugerspørgsmål skal
+besvares. Er søgningen fejlbehæftet, så ikke-relevant viden bliver
+fundet og inkluderet som baggrundsviden for sprogmodellen, så er der
+stor sandsynlighed for at det vil forvirre modellen og lede til forkert,
+misvisende svar eller bare upræcist svar.</p>
+<p>Det er derfor vigtigt, at viden fra kilden er repræsenteret så godt
+som muligt for at få den relevante viden fremsøgt og give modellen den
+rette kontekst at svare ud fra.</p>
+<h2 id="udfordringer">Udfordringer</h2>
+<p>Der er basalt set to udfordringer i at sikre, at det er muligt at få
+viden fra eksterne videnkilder ind som baggrundsviden for en
+sprogmodel.</p>
+<ol type="1">
+<li><p>Få tekst og illustrationer ud af et dokument i den rækkefølge
+forfatteren havde intention om.</p>
+<p>Det handler om at læse selve fil-formatet som viden er gemt i.</p>
+<p>Klassiske eksempler: <em>Tekst i kolonner i et pdf dokument er opsat,
+så teksten ekstraheres med skiftevis en linie fra hver af
+kolonnerne.</em> Eller i et skrab fra en hjemmeside, hvor <em>tekst
+under overskifter eller oplistninger er foldet sammen via javascript
+eller lignende, så det kun fremgår af html-kilden, når de er foldet
+ud</em> eller hvor <em>en lille sektion med en vigtig information flyder
+ude i en margin, visuelt ud for et relevant afsnit, men deklareret et
+helt andet sted i kilden</em>.</p>
+<p>Så givet at ens kilde er et pdf-dokument</p></li>
+</ol>
+<figure>
+<img src="./forberedelse_data-1.svg" alt="diagram" />
+<figcaption aria-hidden="true">diagram</figcaption>
+</figure>
+<ol start="2" type="1">
+<li><p>Forstå den implicitte logik i hvordan forfatteren har
+struktureret viden i dokumentet.</p>
+<p>Eksempler: <em>Er en overskift og/eller teksten efter en overskift
+vigtig for at rammesætte alle følgende underafsnit eller er det bedre at
+hvert enkelt afsnit står alene?</em></p></li>
+</ol>
+<figure>
+<img src="./forberedelse_data-2.svg" alt="diagram" />
+<figcaption aria-hidden="true">diagram</figcaption>
+</figure>
+<p>Eller er en <em>tabel en samling af datapunkter med forskellige
+attributter eller en 2 dimensionel tabel, hvor der både er et kolonne og
+række index, der sætter rammer for en tekst i den pågældende celle.</em>
+Et meget tydeligt eksempel på en 2 dimensionel tabel findes i <a
+href="https://loop.sundhedogomsorg.dk/helhedsvurdering-indhold-og-ansvar">Oversigt
+over dokumentation af helbreds- og funktionsevnetilstande</a>, hvor
+tabellen over har mere karakter af en 1 dimensionel tabel.<br />
+I <a
+href="https://aarhuskommune.sharepoint.com/:w:/s/IntranetDocumentSite/EWnGFoQvqJJGiuGtWFc8cxABXuvXxHi-d8ictUsvY6Zt9w?rtime=7ymVjG_k3Eg">Håndtering
+af ydelser ved flytning</a> har vi et eksempel på noget der næsten er en
+3 dimensionel tabel, delt ud på flere 2D tabeller, men hvor tabel
+overskrifterne udgør den tredje akse. Kolonne overskrifterne går igen på
+alle tabeller og mange af række overskrifterne går også igen mellem
+tabellerne.</p>
+<p>Dertil en meget vigtig 3. udfordring der kun er relevant ved
+henvisning til eksterne hjemmesider/videnssamlinger</p>
+<ol start="3" type="1">
+<li><p>Repræsenterer en henvisning til en hjemmeside kun en henvisning
+til den specifikke side og indholdet i den/de primære bokse (dvs. ikke
+en evt. menu eller footer) eller er det en henvisning til alle sider
+under domænet? Eller endnu værre måske endda nogle links væk fra
+domænet? Eller bare en række logisk knyttede sider under domænet?</p>
+<p>Hvis ens kilde er et website (også sammenhold med pkt 1):</p></li>
+</ol>
+<figure>
+<img src="./forberedelse_data-3.svg" alt="diagram" />
+<figcaption aria-hidden="true">diagram</figcaption>
+</figure>
+<p>Forskellen mellem den primære videnskilde og ekstern data er, at RAG-
+løsningen bygges til/af dem der har truffet alle disse redaktionelle
+valg for den primære videnskilde samt at denne indeholder en stor mængde
+relevant viden. Derfor kan det <em>altid</em> betale sig at
+designe/skrive et data-udtræks-script/procedure. For det eksterne data
+kan der være truffet mange forskellige valg, så der er mange forskellige
+situationer, der skal tages stilling til, og der er ikke nødvendigvis
+ret meget materiale, der er omfattet af den struktur, der afdækkes.
+Derfor <em>kan</em> det give bedre mening, at det er en manuel process
+at trække tekst og viden ud af en given videnskilde alt efter type og
+mængde, men i nogle tilfælde giver det også god mening, at det er et
+script, da dette også sikre en form for dokumentation af hvordan en
+kilde er behandlet.</p>
+<p>Endelig er der spørgsmålet om opdateringer - hvor ofte opdateres
+information der er ekstern, og hvordan finder man ud af, at det er
+opdateret.</p>
+<ul>
+<li>Er der tale om tekstbogsviden, der kan betragtes som statisk (indtil
+en bruger måske klager over forkerte oplysninger - en nyansat der
+påpeger, at det ikke er anbefalet praksis længere - RICE vs PRICEM)</li>
+<li>Kommer der opdateringer fra tid til anden, der bør fanges, nye
+afgørelser fra eks. ankestyrelsen, eller organisations- eller
+procedureændringer (egen læges ansvar vs. hospitalets ansvar)</li>
+<li>Hvad når formatet ændres, docx bliver til pdf eller en dynamisk
+hjemmeside?</li>
+</ul>
+<h2 id="overordnet-behandling-af-kilderne">Overordnet behandling af
+kilderne</h2>
+<p>Start med at samle alle datakilder (gerne med en reference til hvor
+der er en henvisning til den pågældende datakilde i den primære
+videnskilde).</p>
+<p>En domæneekspert bør kategoriserer alt kildemateriale efter</p>
+<ol type="1">
+<li><ul>
+<li><p>Skal viden indgå som baggrundsviden for sprogmodellen?</p>
+<p>Husk sprogmodellen er ikke bare en nyansat, den er slet ikke uddannet
+indenfor feltet. Måske bør tekstbogsmateriale, der er forudsat viden
+blandt ansatte, inkluderes selvom det ikke er refereret i den primære
+vidensdatabase.</p></li>
+<li><p>Er kilden i sig selv et svar?</p>
+<p>Eksempelvis en formular eller kontaktinformation, som sprogmodellen
+bør give direkte som et link til brugeren. Hvis det eksempelvis er en
+formular, er der så en vejledning til formularen, som sprogmodellen skal
+kunne trække på eller bør modellen også have adgang til information i
+formularen, så den kan svarer på spørgsmål ned i formularen.</p>
+<ul>
+<li>Er kilden introduceret fyldestgørende i konteksten?</li>
+<li>Skal der tilføjes ‘alt-tekst’ eller anden meta-data om kilden, som
+sprogmodellen skal have adgang til for at forstå hvad en bruger kan og
+bør bruge kilden til?</li>
+</ul></li>
+<li><p>Er kilden overflødig?</p>
+<p>I så fald bør den nok fjernes helt fra den primære
+videnskilde</p></li>
+</ul></li>
+<li><ul>
+<li>Hvordan kan/skal det opdages/undersøges om viden i kilden er
+opdateret</li>
+<li>Hvor ofte skal viden fra kilden evt. opdateres</li>
+</ul></li>
+</ol>
+<figure>
+<img src="./forberedelse_data-4.svg" alt="diagram" />
+<figcaption aria-hidden="true">diagram</figcaption>
+</figure>
+<p>En data-kyndig bør nu afklarer</p>
+<ol start="3" type="1">
+<li><ul>
+<li>Hvilke “fil”-formater er viden gemt i?
+<ul>
+<li>CMS-system/database, pdf, docx, png, mpeg, API’er, websider</li>
+</ul></li>
+<li>Hvilke data-“modaliteter” er viden gemt i?
+<ul>
+<li>(Ren tekst,) formateret tekst, tabeller (1D eller 2 eller multi-
+dimensionelle), flydende tekstbokse, grafer, diagrammer, billeder, lyd,
+video, interaktivt materiale (websides), funktioner/scripts</li>
+</ul></li>
+<li>Hvilken datastruktur/datamodel skal være grundlag for viden, der
+skal være tilgængelig for sprogmodellen?
+<ul>
+<li>Se afsnittet <a
+href="#datastrukturdatamodel">Datastruktur/datamodel</a> nedenfor</li>
+</ul></li>
+</ul>
+<em>Alt dette kan være afgørende for om en RAG-løsning er tilstrækkelig
+eller om en agent-baseret løsning er nødvendig. Hvilket igen kan have
+stor indflydelse på hvor hurtigt modellen svarer og dermed
+brugeroplevelsen</em></li>
+</ol>
+<p>Herefter bør kilderne grupperes efter om teksten “bare” kan trækkes
+ud, dvs. består af ren tekst, formateret tekst, hvor inddelingen er
+tydelig for det værktøj der benyttes eller hvor illustrationer/figurer
+ikke bidrager med information der ikke allerede er i teksten.
+Alternativt skal kilderne behandles manuelt. Hvis der er kilder, der
+ligner hinanden kan de grupperes sammen og behandles samlet.</p>
+<h3 id="datastrukturdatamodel">Datastruktur/datamodel</h3>
+<p>Under alle omstændigheder er det vigtigt at have en datastruktur
+eller data model, som man vil have sit kildemateriale (både intern og
+eksternt) formateret til. Det sikre en systematisk og veldokumenteret
+repræsentation af viden.</p>
+<p>Alt efter om man har en klar idé om hvordan en RAG løsning skal
+bygges op og derfor hvilken datastruktur, der er nødvendig eller gerne
+vil repræsenterer alt den viden/ struktur, der er i kilde materialet, så
+kan man vælge</p>
+<ul>
+<li>en minimal datastruktur/model som indeholder den information, der er
+nødvendig for det givne RAG design</li>
+<li>en maksimal datastruktur eller data model, der muliggør en
+repræsentation af den viden som kilderne indeholder.</li>
+</ul>
+<p>Afklaring af datamodel</p>
+<ul>
+<li>Hvordan skal kilder refereres?</li>
+<li>Skal kilderne splittes op?
+<ul>
+<li>Fordi en kilde indeholder information/sektioner, der i vid
+udstrækning er uafhængige af hinanden, så man ville forvirre en
+sprogmodel ved at indsætte hele kilden som baggrundsviden for et givet
+spørgsmål.</li>
+<li>Fordi teksten i kilden er for lang til at blive encodet (i forhold
+til semantisk søgning). Her er det også muligt at encode en opsummering
+af teksten, hvis informationen kan opsummeres på en meningsfuld måde på
+det antal tokens encoder-modellen tillader</li>
+</ul></li>
+<li>Skal billeder, figurer og evt. tabeller med som ekstra data, der kan
+præsenteres for brugeren uden at sprogmodellen har forholdt sig til
+billedet, figuren, udover at en ‘alt-tekst’ eller anden form for
+beskrivelse er tilgængelig</li>
+<li>Skal der være forbindelser mellem datapunkterne
+(kilde-brudstykkerne) - altså en form graf-netværk.</li>
+<li>…</li>
+</ul>
+<h3 id="flowchart">Flowchart</h3>
+<figure>
+<img src="./forberedelse_data-5.svg" alt="diagram" />
+<figcaption aria-hidden="true">diagram</figcaption>
+</figure>
+<h3 id="alternativt-design-af-flowchart">Alternativt design af
+flowchart</h3>
+<!-- %%{init: {"flowchart": {"defaultRenderer": "elk"}, "elk": {"mergeEdges": true, "nodePlacementStrategy": "BRANDES_KOEPF", "cycleBreakingStrategy": "GREEDY_MODEL_ORDER"}}}%% -->
+<figure>
+<img src="./forberedelse_data-6.svg" alt="diagram" />
+<figcaption aria-hidden="true">diagram</figcaption>
+</figure>
+<h2 id="oversigt">Oversigt</h2>
+<p>TODO: følgende bør uddybes</p>
+<h3 id="formatet-viden-er-gemt-i">Formatet viden er gemt i</h3>
+<ul>
+<li><p>text</p></li>
+<li><p>pdf</p>
+<ul>
+<li>Publicationer, hvor der har været en grafiker inde over og lave
+visuelt lækker opsætning med mange tekstbokse</li>
+</ul></li>
+<li><p>docx/doc/odf</p>
+<p>Kan formateres meget strikst, men da det er meget anvendte formater
+er dokumenterne mange gange formateret ved at lave visuelle ændringer af
+tekststørrelse o.lign. uden at markere det som overskrift</p></li>
+<li><p>html / interaktive hjemmesider</p>
+<p>Tekst der kan foldes ud</p>
+<p>samling af pdf’er, hvoraf alle pånær et det første eller sidste,
+enten i et filnavn eller som et vandmærke indeholder en tekst a la
+“udgået per” og en dato</p></li>
+<li><p>API’er</p></li>
+<li><p>databaser</p></li>
+<li><p>Raster (pixel) figurer</p>
+<ul>
+<li>Flowcharts</li>
+<li>Grafter</li>
+<li>tabeller (multidimensionale)</li>
+</ul></li>
+<li><p>Slides/powerpoint præsentationer</p></li>
+<li><p>Skanninger/billeder</p></li>
+<li><p>Videoer</p></li>
+<li><p>Lydoptagelser</p></li>
+</ul>
+<h3 id="opsætningen-indenfor-formatet">Opsætningen indenfor
+formatet</h3>
+<p>Følgende kan være vigtigt at forholde sig til, når materiale skal
+opdeles enkelte informationsbærende elementer under
+chunking-processen.</p>
+<ul>
+<li>en title er nogen gange informativ i forhold til et dokuments
+indhold</li>
+<li>en overskrift er ofte kategoriserende for sektionen</li>
+<li>introduktionen til en oplistning kan være vigtig for hver enkelt
+oplistede punkt</li>
+<li>et label eller figur-/tabeltekst er ofte vigtig i forhold til
+læsning af tabel eller graf</li>
+<li>Brødtekst i nærheden af en “flydende” figur/tabel kan være vigtig i
+forhold til at relaterer eller forstå indholdet</li>
+<li>hvor er evt. begrænsninger nævnt</li>
+</ul>
+<h2 id="behandling-af-specifikke-formater">Behandling af specifikke
+formater</h2>
+<p>For videoer - enten opsummer menneskeligt - transkriber med AI</p>
+<h1 id="i-øvrigt">I øvrigt</h1>
+<p>I en opsætning på en 20GB vram server (ved <a
+href="https://www.hetzner.com/dedicated-rootserver/matrix-gpu/">Hertzner</a>)
+med <a href="https://docs.vllm.ai/en/stable/">vLLM</a>, der servere <a
+href="https://llama.meta.com/">llama3 8B</a> uden den er kvantiseret,
+kan modellen i hvert fald køre med en maksimal kontekst længde på
+omkring 8000 tokens, dvs. totalt antal tokens i både prompt og svar, før
+starten af prompten begynder at blive udeladt for at generer videre på
+et svar.</p>
+</body>
+</html>
