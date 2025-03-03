@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>refererede_kilder</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="søgekvalitet-af-refererede-kilder">Søgekvalitet af refererede
+kilder</h1>
+<p>Ud fra en samling af 720 spørgsmål fra spørgsmål/svar-delen af
+Loop-databasen har vi undersøgt simililarity-score på tværs af de
+returnerede chunks når vi laver en Qdrant-søgning. Chunksne er rangeret
+efter score for de første 20 resultater for hver søgning, og for hver
+rang har vi genereret et histogram som beskriver værdiernes
+fordeling.</p>
+<p><img src="./Similarity%20scores%20for%20chunks.png"
+title="Reference scores" alt="Reference scores" /> ## Score over
+rangering Rang 1 er generelt de chunks, som spørgsmål vi slår op i
+databasen kommer fra, og har den højeste score for hver søgning. Et
+enkelt spørgsmål returnerede et andet svar end det fra databasen,
+hvilket var overraskende. Det var spørgsmålet: &gt; Er ydelsen
+forsvundet/fjernet? Jeg kan ikke længere oprette den.</p>
+<p>Den chunk vi havde forventet at få retuneret var chunken indholdende
+spørgsmål og svar:</p>
+<pre><code>Q: Er ydelsen forsvundet/fjernet? Jeg kan ikke længere oprette den.
+
+A: ja det er rigtigt ydelsen med 14 dages modtage kontrollen er fjernet. \r\n\r\nDosisrullen kontrolleres ved apoteket x 2 inden den sendes til borger, hvorfor det er besluttet at vores tredje kontrol ikke er nødvendig.\r\n\r\nNår dosispakket medicin udleveres tælles antallet af piller og samstemmes med fanen lokale medicin ordinationsoversigt.  </code></pre>
+<p>Det højest rangerende svar var i stedet:</p>
+<pre><code>, når du går ind for at oprette ydelser&lt;/li&gt;&lt;li&gt;Søg på den ydelse du ønsker at oprette</code></pre>
+<p>hvor det er umiddelbart klart denne korte chunk minder en del om
+spørgsmålet.</p>
+<p>Generelt viser histogrammet dog, at der er en tydelig separation
+mellem de chunks/resultater som indeholder spørgsmålet og resten. Mellem
+de andre rangeringer er der en mere glidende overgang.</p>
+<h2 id="refererede-kilder">Refererede kilder</h2>
+<p>Dernæst har vi sammenlignet similarity score for de chunks
+indeholdende spørgsmål og de oprindelige svar med chunks fra refererede
+kilder. Refererede kilder er henvisninger/links, som er skrevet
+eksplicit i svaret af den (oftest) fagpersoner, der har besvaret
+spørgsmålet. Vi antager at disse links indikerer ressourcer som
+relaterer til spørgsmålet og kan bruges til at besvarer det. Når man
+kigger nogle af spørgsmål/svar parerne igennem er det dog klart at i
+hvert fald nogle af referencerne er af typen <em>hvis du vil vide mere
+om et specielt underemne, så se her</em>. Det forventes dog stadig, at
+refererede kilder får en relativt høj score. Ud af de 720 spørgsmål har
+78 markeret refererede kilder, hvoraf 62 har en faktisk reference
+indtastet, og det er kun disse vi tilføjer data for. Mange spørgsmål har
+flere referencer og for hver reference vil der ofte være flere chunks,
+derfor bygger histogrammet for referencer på 334 chunks.</p>
+<figure>
+<img src="./Similarity%20score%20Comparison%20of%20chunk%20ranks.png"
+title="Reference scores" alt="Rangeret sammenligning" />
+<figcaption aria-hidden="true">Rangeret sammenligning</figcaption>
+</figure>
+<p>Chunks indeholdende det oprindelige spørgsmål får som forventet den
+højeste score. Chunks fra de refererede kilder har umiddelbart en
+sammenlignelig score i forhold til det højest rangerede chunk i hver
+søgning, der hverken indeholder spørgsmålet eller stammer fra en kilde
+der er refereret i svaret.</p>
+<p>Under antagelse af at de chunks der kommer fra refererede kilder er
+de chunk der er vigtige for at en sprogmodel kan svare på et givet
+spørgsmål og de chunks der ikke kommer fra de refererede kilder kun vil
+forvirre spørgsmodellen, så kan qdrants semantiske søgning ikke
+umiddelbart bruges til at skelne de væsentlige chunks fra de
+uvæsentlige.</p>
+<p>Datasættet for spørgsmål med referencer og forståelsen af om en
+reference er essentiel for at kunne besvare et spørgsmål eller blot er
+ekstra info (evt. til grænse tilfælde) gør at konklusionen er
+spekulativt. Det konkluderes dog stadig at det med qdrants søgning ikke
+er muligt at skelne relevante fra urelevante chunks, hvorfor vi må
+afprøve et re-ranking modul.</p>
+</body>
+</html>
