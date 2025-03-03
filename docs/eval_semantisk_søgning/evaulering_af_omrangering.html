@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>evaulering_af_omrangering</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="evaluering-af-omrangering">Evaluering af omrangering</h1>
+<p>For at kvalitetsteste resultatet af vores omrangering har vi sendt 50
+spørgsmål til evaluering hos faglige eksperter.</p>
+<p>Spørgsmålene blev kom fra det eksisterende <a
+href="https://loop.sundhedogomsorg.dk/search?f%5B0%5D=content_type%3Aos2loop_question">Loop
+spørgsmål/svar korpus</a> og blev efter den almindelige semantiske
+vektorsøgning sendt igennem en cross-encoder omrangering, hvorefter de
+fem toprangerede tekstbidder blev præsenteret sammen med spørgsmålene.
+Eksperterne har så vurderet, om hver tekstbid var relevant i forhold til
+spørgsmålet.</p>
+<p>Ved den semantiske vektorsøgning blev der udsøgt 20 tekststykker, der
+blev brugt ved omrangeringen.</p>
+<p>Ud af 50 spørgsmål var 10 udenfor vores fageksperters domæne, og
+disse er blevet sprunget over.</p>
+<p>Vi vurderer kvaliteten af fremsøgning med cross-encoder-omrangering
+ved at se hvor ofte fremsøgning har resuleret i relevante tekstbidder i
+top-k (med k fra 1 til 5), kaldet hit@k. Dette giver et mål for
+kvaliteten af fremsøgningsmetoden.</p>
+<p>I første omgang er det hvor ofte ud af de 40 spørgsmål med fem
+fremsøgte tekstbidder, at der er minimum en relevant tekstbid i top k,
+eksempelvis k=3: hit@3</p>
+<p>I anden omgang antager vi al den information der skal bruges til at
+svare på et givent spørgsmål findes i loop dokumenterne (altså loop
+indholdet fraregnet spørgsmål/svar sektionen, hvor vi har taget
+spørgsmålene fra) og udregner igen hit@k ud fra dette mindre
+datagrundlag. Dette gør vi for at simulere hvad hit@k og dermed
+kvaliteten må forventes at være for vores konkrete løsning, når en
+fremtidig bruger stiller et spørgsmål, der ikke er set tidligere.</p>
+<p>Dette er ikke et helt godt mål, da spørgsmålene i loop spørgsmål/svar
+sektion har en tendens til at være stillet netop fordi svaret ikke
+fandtes i databasen på spørge tidspunktet.</p>
+<p>Testen er udført med <a
+href="https://github.com/itk-ai/loop_testbench/blob/26c4fad55e72ed435b625defae0724bc72d22619/configs/embedding_config.json">indstillingerne</a>:</p>
+<ul>
+<li>Vektorsøgningsmodel: <a
+href="https://huggingface.co/intfloat/multilingual-e5-large">intfloat/multilingual-e5-large</a>
+med config: <a
+href="https://github.com/itk-ai/loop_testbench/blob/26c4fad55e72ed435b625defae0724bc72d22619/configs/embedding_config.json">configs/embedding_config.json</a></li>
+<li>cross-encoder brugt til reranker: <a
+href="https://huggingface.co/KennethTM/MiniLM-L6-danish-reranker">KennethTM/MiniLM-L6-danish-reranker</a></li>
+<li>Instans af vektordatabase: <a
+href="https://qdrant.srvitkollama02.itkdev.dk/dashboard#/collections/loop_12-2024_VDB_md_meta-ref_recur-char-split_intfloat-multilingual-e5-large">loop_12-2024_VDB_md_meta-ref_recur-char-split_intfloat-multilingual-e5-large</a></li>
+</ul>
+<h2 id="datatransformation">Datatransformation</h2>
+<p>Ud af de 50 spørgsmål vi sendte til vore fageksperter, er 10 sorteret
+helt fra. Fageksperterne vurderede ikke, at de var i stand til at
+bedømme svarene kvalitativt, da spørgsmålene lå udenfor deres domæne. De
+resterende 40 spørgsmål udgør det primære korpus.</p>
+<p>I blandt de tekstbidder som vi har arbejdet med, findes de
+oprindelige svar på spørgsmålet. Vi har taget de oprindelige svar med i
+første kørsel, men udeladt dem fra anden kørsel. De spørgsmål, hvor det
+oprindelige svar er den eneste tekstbid som er fundet relevant af de
+faglige eksperter, har vi også sorteret helt fra korpus til anden
+kørsel. Dette resulterede i et reduceret korpus på 20 spørgsmål, hvor de
+oprindelige svar er frasorteret. Svarene er sorteret fra ved at udelukke
+dem fra sammentællingen, så der ud af de fem svar i nogle tilfælde kun
+vurderes fire svar på et spørgsmål. Det svarer til, at de oprindelige
+svar er vurderet ikke relevant.</p>
+<h2
+id="performance-for-fremsøgning-med-cross-encoder-omrangering">Performance
+for fremsøgning med cross-encoder-omrangering</h2>
+<p>Først talte vi for hver spørgsmål, hvornår et relevant svar blev
+fundet af de udsøgte svarmuligheder, hvor K1 er det toprangerede svar,
+med faldende rangering derefter:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">hit@1</th>
+<th style="text-align: center;">hit@2</th>
+<th style="text-align: center;">hit@3</th>
+<th style="text-align: center;">hit@4</th>
+<th style="text-align: center;">hit@5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0,28</td>
+<td style="text-align: center;">0,48</td>
+<td style="text-align: center;">0,63</td>
+<td style="text-align: center;">0,68</td>
+<td style="text-align: center;">0,75</td>
+</tr>
+</tbody>
+</table>
+<p>Dette viser, at vi med omrangeringen får relevante svar som det
+højest rangerede svar 28% af gangene, og indenfor de første fem svar 75%
+af gangene. Resultatet er ikke lovende, og vi vurderer at omrangeringen
+ikke bidrager med noget til at fremsøge chunks af materiale, som
+kvalitativt kan bruges i svar. Dette kan skyldes den model vi bruger til
+reranking, og skal muligvis genbesøges på et senere tidspunkt.</p>
+<h2 id="performance-af-potentiel-loop-løsning">Performance af potentiel
+loop løsning</h2>
+<p>Derefter sorterede vi spørgsmål fra, hvor det oprindelige svar var
+det eneste relevate svar fundet, og fjernede generelt de oprindelige
+svar fra de relevante svar:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">hit@1</th>
+<th style="text-align: center;">hit@2</th>
+<th style="text-align: center;">hit@3</th>
+<th style="text-align: center;">hit@4</th>
+<th style="text-align: center;">hit@5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0,15</td>
+<td style="text-align: center;">0,25</td>
+<td style="text-align: center;">0,35</td>
+<td style="text-align: center;">0,35</td>
+<td style="text-align: center;">0,45</td>
+</tr>
+</tbody>
+</table>
+<p>Herved faldt træfsikkerheden indenfor de første 5 spørgsmål til 45%,
+hvilket vurderes for lavt til at være brugbart. Dette kommer ud af en
+pulje på 20 spørgsmål, hvor omrangeringen har tilføjet svarmuligheder,
+som er vurderet relevant.</p>
+<h2 id="konklusion">Konklusion</h2>
+<p>Omrangeringen bidrager i følge denne test ikke kvalitativt til
+svarmulighederne, men de eksisterende spørgsmål vurderes desuden til at
+være et uhensigtsmæssigt grundlag for en bred evaluering. Som næste
+skridt har vi fået en række nye spørgsmål med reference til
+identificerede relevante kilder, som vi ønsker skal blive en del af de
+chunks vi sender videre til sprogmodellen.</p>
+</body>
+</html>

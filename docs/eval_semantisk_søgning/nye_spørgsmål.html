@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>nye_spørgsmål</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="introduktion">Introduktion</h1>
+<p>Fra vores fagpersoner har vi indsamlet 25 spørgsmål, som ikke fandtes
+i Loop i forvejen. Fagpersonerne har for hvert spørgsmål fundet 1-3
+kilder som er relevante for hvert spørgsmål. Disse er blevet samlet i et
+<a
+href="https://aarhuskommune.sharepoint.com/:x:/r/teams/ConversationalAIAarhus-DSG10fase2/Delte%20dokumenter/Case%20-%20Loop/Testcases%20med%20svar%20i%20Loop.xlsx?d=w0addc8bfa06d404fa46dba4a9cb96224&amp;csf=1&amp;web=1&amp;e=DC7ZHd">excel-ark</a>.</p>
+<p>Formålet med at indsamle spørgsmålene er at sammenligne, i hvor høj
+grad vektorsøgning og reranking finder de relevante kilder, for at
+etablere en pålidelig metode til at evaluere fremsøgningen af spørgsmål
+og dermed forbedre metode så de mest relevante kilder returneres.</p>
+<p>Efter indsamlingen kørte vi en vektor søgning hvor grænsen for hvor
+mange tekstbidder, der blev returneret, blev sat så minimum en tekstbid
+blev returneret fra hver af de dokumenter redaktørerne havde udpeget som
+relevante kilder. De retunerede tekstbidder blev derefter reranket med
+cross-encoderen.</p>
+<p>De tre top rangerede tekstbidder fra både den rå vektorsøgning samt
+rerankeren blev sendt tilbage til fagpersonerne, som vurderede om de
+returnerede tekstbidder var relevante. Se evt <a
+href="https://aarhuskommune.sharepoint.com/:x:/r/Sites/afd-afdsite3226/_layouts/15/Doc.aspx?sourcedoc=%7BBFB09AE8-C9F9-4B03-AB11-E62B4A2633B4%7D">arket
+her</a>. Dette blev gjort for at sikre at fremsøgningsmodellerne ikke
+blev vurderet dårligere, hvis de faktisk fandt noget relevant i
+databasen, som redaktører bare havde glemt/overset, da de lavede
+spørgsmålene.</p>
+<p>Plottet herunder viser hvor dybt de forventede kilder blev fundet i
+hhv. vektorsøgning og reranking.</p>
+<figure>
+<img src="./vectorsearch_rerank_depthsearch_plot.png"
+title="Plot af rangering efter vektorsøgning og reranking"
+alt="Rangeringsplot" />
+<figcaption aria-hidden="true">Rangeringsplot</figcaption>
+</figure>
+<h2 id="test-configuration">Test configuration</h2>
+<p>Testen er udført med <a
+href="https://github.com/itk-ai/loop_testbench/blob/26c4fad55e72ed435b625defae0724bc72d22619/configs/embedding_config.json">indstillingerne</a>:</p>
+<ul>
+<li>Vektorsøgningsmodel: <a
+href="https://huggingface.co/intfloat/multilingual-e5-large">intfloat/multilingual-e5-large</a>
+med config: <a
+href="https://github.com/itk-ai/loop_testbench/blob/26c4fad55e72ed435b625defae0724bc72d22619/configs/embedding_config.json">configs/embedding_config.json</a></li>
+<li>cross-encoder brugt til reranker: <a
+href="https://huggingface.co/KennethTM/MiniLM-L6-danish-reranker">KennethTM/MiniLM-L6-danish-reranker</a></li>
+<li>Instans af vektordatabase: <a
+href="https://qdrant.srvitkollama02.itkdev.dk/dashboard#/collections/loop_12-2024_VDB_md_meta-ref_recur-char-split_intfloat-multilingual-e5-large">loop_12-2024_VDB_md_meta-ref_recur-char-split_intfloat-multilingual-e5-large</a></li>
+</ul>
+<h1 id="metode">Metode</h1>
+<p>Data blev leveret i excel-ark, som indlæstes i python som objekter
+med spørgsmål om forventede kilder. Spørgsmålene blev brugt som
+query-streng i en vektorsøgning ned i vektordatabasen. Antallet af
+returnerede tekstbidder blev forøget, indtil alle spørgsmål returnerede
+mindst en tekstbid fra alle de forventede kilder. Dette gav os en dybde
+på 141. De returnerede tekstbidder fra vektorsøgningen blev sendt gennem
+reranking. For hvert spørgsmål indsætte vi top 3 returnerede kilder fra
+hhv. vektorsøgning og reranking i et excel-ark, som vi sendte tilbage
+til fagpersonerne for at få evalueret om svarene var relevante.</p>
+<p>Efter fagpersonerne havde gennemgået arket og vurderet om hver
+returneret tekstbid var relevant som kilde for et svar på det tilhørende
+spørgsmål, har vi dels kontrolleret om tekstbidder fra de forventede
+kilder konsistent er evalueret relevante og dels etableret en præcision
+for hhv. vektorsøgning or reranking.</p>
+<h2
+id="kontrol-af-fagpersonernes-konsistens-i-at-udpege-de-relevante-kilder-til-at-svare-på-et-givent-spørgsmål">Kontrol
+af fagpersonernes konsistens i at udpege de relevante kilder til at
+svare på et givent spørgsmål</h2>
+<p>Givet et spørgsmål kan vi se det som et binært klassifiseringsproblem
+at afgøre om hver enkel kilde i vores korpus er en relevant kilde. Vi
+ser på hvordan fagspersonerne overrasker eller bekræfter i forhold til
+den oprindelige information de gav om kilder.</p>
+<p>For hvert spørgsmål præsenterer vi så op til seks tekstbidder (tre
+fra vektorsøgningen og tre fra rerankeren, hvor der kan være overlap).
+Tekstbidderne kan ydermere repræsenterer samme kildedokument. For hvert
+spørgsmål kan vi så tælle op om</p>
+<ul>
+<li>hvor mange gange bekræftes det, at en tekstbid, som kommer fra et
+dokument der er udpeget som kilde, er relevant som kilde (“bekræftet
+positiv”)</li>
+<li>hvor mange gange overrasker de ved at erklære, at en tekstbid, som
+kommer fra et dokument der er udpeget som kilde, <em>ikke</em> er
+relevant som kilde (“overrasket negativ”)
+<ul>
+<li>disse skal ikke tælles med, hvis en anden tekstbid fra samme
+dokument allerede er bekræftet som værende relevant, altså en bekræftet
+positiv. (Det skyldes at det ikke er overraskende, at hvis der er flere
+tekstbidder fra samme dokument (udpeget som værende relevant kilde) og
+det kun er den ene tekstbid der bliver vurderet relevant.</li>
+</ul></li>
+<li>hvor mange gange overrasker de ved at erklære, at en tekstbid, som
+kommer fra et dokument der <em>ikke</em> var udpeget som kilde, faktisk
+er relevant som kilde (“overrasket positiv”)</li>
+<li>hvor mange gange bekræfter de, at en tekstbid, som kommer fra et
+dokument der <em>ikke</em> var udpeget som kilde, <em>ikke</em> er
+relevant (“bekræftet negativ”)</li>
+</ul>
+<p>Disse 4 kategorier danner en form for confusion matrix, som igen kan
+bruges til at udregne <a
+href="https://en.wikipedia.org/wiki/Precision_and_recall">diverse
+mål</a>.</p>
+<h2 id="træfsikkerhed">Træfsikkerhed</h2>
+<p>For at vurdere kvaliteten af hhv. vektorsøgning og vektorsøgning med
+reranking, og for at kunne sammenligne dem, udregner vi en <a
+href="https://en.wikipedia.org/wiki/Precision_and_recall">hit rate
+(træft rate)</a> (også kaldet “recall”) for i hvilken
+fremsøgningsmetoderne finder de forventede kilder til et spørgsmål.</p>
+<p>Hit raten udregnes som andelen af de på forhånd udpegede kilder til
+et spørgsmål der optræder i top 3 i forhold til det totale antal
+udpegede kilder til spørgsmålet. De fleste spørgsmål refererer kun en
+enkelt forventet kilde, men nogle har op til tre.</p>
+<p>Vi rapporterer den gennemsnitlige hit rate over alle spørgsmålene.
+Dette gør vi for både det samlede sæt, for vektorsøgning og for
+reranking.</p>
+<h1 id="resultater">Resultater</h1>
+<h2 id="evaluering-af-konsistens">Evaluering af konsistens</h2>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Udpeget som kilde</th>
+<th>Fravalgt som kilde</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Vurderet relevant</strong></td>
+<td>19</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><strong>Vurderet irrelevant</strong></td>
+<td>21</td>
+<td>77</td>
+</tr>
+</tbody>
+</table>
+<p>Oversigten kan opsummeres i følgende tal: -
+Forventningsbekræftigelsesgrad: 0.48 (præcision) -
+Forventningskorrekthedsgrad: 0.83 (recall)</p>
+<p>Det skal bemærkes at det ikke nødvendigvis skyldes manglende
+konsistens fra eksperterne at 21 tekstbidder fra kilder der på forhånd
+var udpeget som kilder til et spørgsmål bliver vurderet irrelevante. En
+væsentlig del af skylden for det er sikkert også at
+fremsøgningsmekanismen finder en forkert bid af teksten fra kilden eller
+at der simpelthen ikke er en tekstbid der indeholder nok af kildens
+tekst til at tekstbidden i sig selv er relevant.</p>
+<h2 id="træf-grad-hit-raterecall">Træf-grad (hit rate/recall)</h2>
+<p><a
+href="https://en.wikipedia.org/wiki/Precision_and_recall">Træfgraden/hit
+raten</a> for vektorsøgning og reranking viser, hvor stor andel af de
+forventede kilder der gennemsnitligt er i top tre fra hhv. vektorsøgning
+og reranking. Den samlede hit rate viser andelen af forventede kilder
+som optræder enten i vektor søgningens top 3 eller rerankingens top 3
+(Dvs. blandt potentielt 6 kilder).</p>
+<ul>
+<li>Hit raten for top 3 fra vektor søgning: 65%</li>
+<li>Hit rate for top 3 fra vektorsøgning med efterfølgende
+cross-encorder reranking: 44%</li>
+<li>Hit raten blandt begge fremsøgningsmethoders top 3 kombineret:
+77%</li>
+</ul>
+<h2 id="lessons-learned">Lessons learned</h2>
+<p>Når fagpersoner/redaktører bliver bedt om at vurderer om et dokument
+er relevant, som kilde, er det vigtig at relevant bliver defineret
+eksplicit som <em>nødvendig</em> for at svare på spørgsmålet, dvs. at vi
+ikke leder efter de dokumenter der kan tilføje ekstra
+oplysninger/baggrund/fun facts eller eksempler (medmindre svaret er nødt
+til at ekstraheres fra eksemplerne). Desuden skal kildener (til sammen -
+hvis der er flere) give al den information der er nødvendig for at svare
+på spørgsmålet (ellers kan spørgsmålet ikke bruges til at teste
+fremsøgningen), dvs. kilden/kilderne skal være tilstrækkelig.</p>
+</body>
+</html>
