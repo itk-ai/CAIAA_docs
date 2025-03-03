@@ -9,7 +9,8 @@ server {
     real_ip_header X-Forwarded-For;
 
     location / {
-        index index.html;
+	autoindex on;
+#        index index.html;
     }
 
     # Send log message to files symlinked to stdout/stderr.
